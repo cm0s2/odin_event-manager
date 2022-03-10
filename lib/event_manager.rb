@@ -43,7 +43,6 @@ def peak_registration_dow(dates)
   peak.sort_by { |_day, times| times }.reverse.to_h
 end
 
-
 def legislators_by_zipcode(zip)
   civic_info = Google::Apis::CivicinfoV2::CivicInfoService.new
   civic_info.key = 'AIzaSyClRzDqDh5MsXwnCWi0kOiiBivP6JsSyBw'
@@ -91,15 +90,11 @@ contents.each do |row|
   phonenumber = row[:homephone]
   cleaned_phonenumber = clean_phonenumber(phonenumber)
 
-
   registration_date = clean_date(row[:regdate])
   registration_dates.push(registration_date)
 
-
-  
-
-  # form_letter = erb_template.result(binding)
-  # save_thank_you_letter(id, form_letter)
+  form_letter = erb_template.result(binding)
+  save_thank_you_letter(id, form_letter)
 end
 
 puts peak_registration_hours(registration_dates)
